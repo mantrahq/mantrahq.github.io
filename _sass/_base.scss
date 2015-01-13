@@ -1,16 +1,6 @@
 body {
     background: black;
     color: white;
-    background-attachment: fixed;
-    background-image: url(../img/dive.jpg);
-    background-position: center center;
-    background-repeat: none;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
 }
 
 .jumbo-header {
@@ -31,7 +21,8 @@ body {
 
     .strapline {
         font-size: 75px;
-        font-weight: 700;
+        font-family: $font-family-serif;
+        font-style: italic;
 
         em {
             font-family: $font-family-serif;
