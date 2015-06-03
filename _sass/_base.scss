@@ -1,38 +1,113 @@
-body {
-    background: black;
-    color: white;
+html {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
 }
+
+body {
+    height: 100%;
+    background: $gray-lighter;
+    padding-top: 75px;
+
+    &.home-page {
+        padding-top: 0;
+    }
+}
+
+%ease {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
 
 .jumbo-header {
     text-align: center;
-    height: 100%;
+    background-color: #000;
+    color: #fff;
+    background-attachment: scroll;
+    height: auto;
 
-    @media (min-width: 768px) {
-        .intro-text {
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
+    @media (min-width: $screen-sm) {
+        height: 100%;
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+        background-image: url(../img/bg-view.jpg);
     }
 
-    .navbar-inverse {
-        background-color: transparent;
-        border-color: transparent;
+    .intro-text {
+        height: 100%;
+        display:flex;
+        align-items:center;
     }
+
 
     .strapline {
-        font-size: 75px;
+        margin: 0 auto;
         font-family: $font-family-serif;
-        font-style: italic;
+        font-size: 36px;
+        @media (min-width: $screen-sm) {
+            font-size: 56px;
+        }
+
+        @media (min-width: $screen-md) {
+            font-size: 76px;
+        }
+
 
         em {
             font-family: $font-family-serif;
+            font-weight: 700;
             color: $yellow;
         }
     }
 }
 
+.navbar-inverse {
+    @extend %ease;
+    border: none;
+    background-color: transparent;
+}
+
+
 .navbar {
     margin-bottom: 0;
+
+    &.affix {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        top: 0;
+        border-width: 0;
+    }
+    &.affix-top {
+        position: static;
+    }
+}
+
+.navbar-fixed-top {
+    position: initial;
+    background-color: #000;
+
+    @media (min-width: $screen-sm) {
+        position: fixed;
+
+        .home-page & {
+            background-color: transparent;
+        }
+    }
+}
+
+// Hack to fix the jump when the navbar becomes affixed
+.affix + .container {
+    padding-top: 75px
 }
 
 .navbar-brand {
@@ -46,13 +121,69 @@ body {
 }
 
 .brand-header {
-    padding-top: 40px;
+    padding-top: 10px;
     padding-bottom: 15px;
+
+    .social-list {
+        margin: 0 auto;
+        margin-top: 9px;
+
+        @media (min-width: $screen-sm) {
+            float: right;
+        }
+    }
+}
+
+.m-logo {
+    @extend %ease;
+    position: relative;
+
+    &:after {
+        @extend %ease;
+        position: absolute;
+        content: "";
+        display: block;
+        width: 40%;
+        left: 30%;
+        bottom: 10px;
+        border-top: 2px solid transparent;
+    }
+}
+
+.rest-logo {
+    @extend %ease;
+    opacity: 1;
+}
+.navbar-inverse.sticky {
+    background-color: black;
+    border: none;
+
+    .m-logo {
+        @extend %ease;
+        font-size: 56px;
+
+        &:after {
+            @extend %ease;
+            border-top: 2px solid $orange;
+        }
+        &:hover {
+            &:after {
+                width: 100%;
+                left: 0;
+            }
+        }
+    }
+
+    .rest-logo {
+        @extend %ease;
+        opacity: 0;
+    }
 }
 
 .background-dark {
     background: black;
     color: white;
+
 }
 
 .background-light {
@@ -65,10 +196,64 @@ body {
     color: white;
 }
 
+.background-brand {
+    background: $yellow;
+    color: black;
+}
+
+.text-medium {
+    color: $gray;
+}
+
+.text-light {
+    color: #fff;
+}
+
 .social-list {
-    font-size: 18px;
     a {
         color: white;
+    }
+
+    // branded colours for social links.
+    .sl-twitter:hover {color:#48c4d2 !important;}
+    .sl-facebook:hover {color:#3b5998 !important;}
+    .sl-google-plus:hover {color:#d94a39 !important;}
+    .sl-pinterest:hover {color:#cb2027 !important;}
+    .sl-youtube:hover {color:#f45750 !important;}
+    .sl-linkedin:hover {color:#71b2d0 !important;}
+    .sl-instagram:hover {color:#517fa4 !important;}
+}
+
+.roomy-row {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tight-below {
+    margin-bottom: 0;
+}
+
+.going-down {
+    @media (min-width: $screen-sm) {
+        padding: 15px;
+        position: absolute;
+        z-index: 1;
+        left: 0%;
+        width: 100%;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        bottom: 0%;
+    }
+}
+
+.footer {
+    a {
+        color: $gray;
+        text-decoration: underline;
     }
 }
 

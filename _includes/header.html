@@ -1,21 +1,23 @@
-<div class="jumbo-header">
-    <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container brand-header">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">MANTRA <small>hq</small></a>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top" data-sticky >
+    <div class="container brand-header">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><span class="m-logo">M</span><span class="rest-logo">ANTRA <small>hq</small></span></a>
 
-    <div class="container light-text">
-        <div class="intro-text">
-            <div class="strapline">
-                Bringing <em>meaning</em> to<br>your message.
-            </div>
-            <p class="text-center" style="margin-top:15px;">
-            <a href="mailto:hello@mantrahq.com" class="btn btn-primary btn-lg" 
-                style="color:black; font-family:'Alegreya SC', Georgia, 'Times New Roman', Times, serif;">Contact us now</a>
-            </p>
         </div>
+            <ul class="list-inline list-inline tight-below social-list text-center">
+                <li><a href="https://twitter.com/MantraMediaLtd" class="sl-twitter"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/mantra-media-ltd" class="sl-linkedin"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                <li><a href="https://www.facebook.com/MantraMedia" class="sl-facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                <li><a href="https://plus.google.com/u/0/+MantrahqGoogle/posts" class="sl-google-plus"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+            </ul>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            {% for page in site.pages_list %}
+                {% if page.title %}
+                    <li><a href="{{ page[0] | prepend: site.baseurl }}">{{ page[1] }}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-</div>
+</nav>
