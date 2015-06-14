@@ -109,7 +109,7 @@ $('#contactForm').validate({
         $.ajax({
             url: "//formspree.io/hello@mantrahq.com", 
             method: "POST",
-            data: $(this).serialize(),
+            data: form.serialize(),
             dataType: "json",
             success: function(data){
                 // Success message
