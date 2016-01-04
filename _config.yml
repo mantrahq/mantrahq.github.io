@@ -5,7 +5,7 @@ description: > # this means to ignore newlines until "baseurl:"§
     At Mantra we create strategies and online marketing models for businesses
     that aren't shrouded in jargon.
 baseurl: "" # the subpath of your site, e.g. /blog/
-year: 2015
+year: 2016
 url: "http://www.mantrahq.com" # the base hostname & protocol for your site
 
 paginate: 5
