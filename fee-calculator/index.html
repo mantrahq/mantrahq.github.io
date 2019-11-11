@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Fee Calculator | mantrahq.github.io</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+    }
+
+    .container-fluid {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    form label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1 class="h3">Fee Calculator</h1>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <form id="form" class="form" data-view="calculate">
+
+          <div class="form-group">
+            <label for="price">Asking price</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  £
+                </span>
+              </div>
+              <input type="number" class="form-control" id="price" name="price" value="175000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="package">Marketing package</label>
+            <select class="custom-select" id="package" name="package">
+              <option value="295" selected>Standard (£295)</option>
+              <option value="495">Social (£495)</option>
+              <option value="695">Enhanced (£695)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="firm">Solicitor firm</label>
+            <select class="custom-select" id="firm" name="firm">
+              <option selected value="taylorEmett">Taylor & Emett</option>
+              <option value="keebles" disabled>Keebles</option>
+              <option value="bannerJones" disabled>Banner Jones</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Legal Extras</label>
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" name="legalExtras[0]" type="checkbox" id="lhHouse" value="75">
+              <label class="custom-control-label" for="lhHouse">
+                Leasehold house
+                <small class="muted">£75</small>
+              </label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" name="legalExtras[1]" type="checkbox" id="lhFlat" value="175">
+              <label class="custom-control-label" for="lhFlat">
+                Leasehold flat
+                <small class="muted">£175</small>
+              </label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" name="legalExtras[2]" type="checkbox" id="mortgage" value="100">
+              <label class="custom-control-label" for="mortgage">
+                Mortgage
+                <small class="muted">£100</small>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Calculate</button>
+        </form>
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="collapse" id="collapseDiscount" data-view="discount">
+          <h2 class="h4">Discounts</h2>
+          <table class="table table-sm">
+            <tbody>
+              <tr>
+                <th scope="row">EA fees:</th>
+                <td class="text-right">
+                  £<span data-output="ea"></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">With VAT:</th>
+                <td class="text-right">
+                  £<span data-output="eaWithVat"></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Legal fees:</th>
+                <td class="text-right">
+                  £<span data-output="legal"></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">With VAT:</th>
+                <td class="text-right">
+                  £<span data-output="legalWithVat"></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Additional legal fees:</th>
+                <td class="text-right">
+                  £<span data-output="legalExtras"></span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Total fees:</th>
+                <td class="text-right">£<span data-output="total"></span></td>
+              </tr>
+              <tr>
+                <th scope="row">With VAT:</th>
+                <td class="text-right">£<span data-output="totalWithVat"></span></td>
+              </tr>
+              <tr>
+                <th scope="row">Total as percentage:</th>
+                <td class="text-right"><span data-output="totalAsPercentage"></span>%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <form class="form" data-view="discount">
+            <input type="hidden" data-output="totalWithVat">
+            <input type="hidden" data-output="price">
+            <div class="form-group" data-view="range">
+              <label for="upfrontDisplay">Upfront payment</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    £
+                  </span>
+                </div>
+                <input type="number" readonly class="form-control" id="upfrontDisplay" name="upfrontDisplay" value="600"
+                  data-view-output>
+              </div>
+
+              <input type="range" class="custom-range" name="upfront" id="upfront" min="300" max="900" step="50"
+                value="600">
+              <div class="text-center mt-2">
+                <strong date-output class="text-muted"></strong>
+              </div>
+            </div>
+
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">Discount on balance:</th>
+                  <td class="text-right"><span data-output="discount"></span>%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Total discount:</th>
+                  <td class="text-right">£<span data-output="totalDiscount"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Total paid:</th>
+                  <td class="text-right">£<span data-output="totalPaid"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Total as percentage:</th>
+                  <td class="text-right"><span data-output="percentageOfValue"></span>%</td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script src="./serializejson.js"></script>
+  <script src="./calculate.js"></script>
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
