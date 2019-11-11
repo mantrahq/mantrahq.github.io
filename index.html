@@ -1,36 +1,39 @@
----
-layout: home
----
+<!doctype html>
+<html lang="en">
 
-<div class="home">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% include about-us.html %}
+    <title>Mantra Media | mantrahq.github.io</title>
 
-{% include services.html %}
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
 
-<div class="background-dark roomy-row">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="lead text-center text-light">
-                    What our clients say about us
-                </p>
-                {% include carousel.html %}
-            </div>
-        </div>
-    </div>
-</div>
+        a {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -100px;
+        }
+        img {
+            width: 200px;
+            height: 47px;
+        }
+    </style>
+</head>
 
-<div class="background-light roomy-row">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="lead text-center">
-                    Who we've worked with
-                </p>
-                {% include clients.html %}
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<body>
+    <a href="https://mantrahq.com/">
+        <img src="mm.png" alt="Mantra Media">
+    </a>
+</body>
+
+</html>
