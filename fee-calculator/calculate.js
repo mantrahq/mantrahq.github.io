@@ -11,33 +11,33 @@ const legalFirms = [
         tt: 35,
       },
       {
-        price: 300000,
+        price: 150000,
         legal: 550,
         tt: 36,
       },
       {
-        price: 500000,
+        price: 300000,
         legal: 650,
         tt: 37,
       },
       {
-        price: 750000,
+        price: 500000,
         legal: 790,
         tt: 38,
       },
       {
-        price: 1000000,
+        price: 750000,
         legal: 940,
         tt: 39,
       },
       {
-        price: 1500000,
-        legal: 124,
+        price: 1000000,
+        legal: 1240,
         tt: 40,
       },
       {
         price: 1500000,
-        legal: 170,
+        legal: 1700,
         tt: 41,
       },
     ]
