@@ -57,13 +57,13 @@
           <div class="form-group">
             <label for="package">Marketing package</label>
             <select class="custom-select" id="package" name="package">
-              <option value="295" selected>Standard (£295)</option>
-              <option value="495">Social (£495)</option>
-              <option value="695">Enhanced (£695)</option>
+              <option value="295" selected>Standard</option>
+              <option value="495">Social</option>
+              <option value="695">Enhanced</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="firm">Solicitor firm</label>
+            <label for="firm">Lawyer firm</label>
             <select class="custom-select" id="firm" name="firm">
               <option selected value="taylorEmett">Taylor & Emett</option>
               <option value="keebles" disabled>Keebles</option>
@@ -71,26 +71,29 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Legal Extras</label>
+            <label>Legals</label>
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" name="legalExtras[0]" type="checkbox" id="lhHouse" value="75">
+              <input class="custom-control-input" name="legalExtras[0]" type="checkbox" id="fhHouse" value="fhHouse">
+              <label class="custom-control-label" for="fhHouse">
+                Freehold house
+              </label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" name="legalExtras[1]" type="checkbox" id="lhHouse" value="lhHouse">
               <label class="custom-control-label" for="lhHouse">
                 Leasehold house
-                <small class="muted">£75</small>
               </label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" name="legalExtras[1]" type="checkbox" id="lhFlat" value="175">
+              <input class="custom-control-input" name="legalExtras[2]" type="checkbox" id="lhFlat" value="lhFlat">
               <label class="custom-control-label" for="lhFlat">
                 Leasehold flat
-                <small class="muted">£175</small>
               </label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" name="legalExtras[2]" type="checkbox" id="mortgage" value="100">
+              <input class="custom-control-input" name="legalExtras[3]" type="checkbox" id="mortgage" value="mortgage">
               <label class="custom-control-label" for="mortgage">
                 Mortgage
-                <small class="muted">£100</small>
               </label>
             </div>
           </div>
@@ -102,93 +105,53 @@
       <div class="col-md-6">
 
         <div class="collapse" id="collapseDiscount" data-view="discount">
-          <h2 class="h4">Discounts</h2>
-          <table class="table table-sm">
+          <h2 class="h4">Selling costs<br><small>Including all legal selling costs</small></h2>
+          <table class="table table-borderless table-sm">
             <tbody>
               <tr>
-                <th scope="row">EA fees:</th>
-                <td class="text-right">
-                  £<span data-output="ea"></span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">With VAT:</th>
-                <td class="text-right">
-                  £<span data-output="eaWithVat"></span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Legal fees:</th>
-                <td class="text-right">
-                  £<span data-output="legal"></span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">With VAT:</th>
-                <td class="text-right">
-                  £<span data-output="legalWithVat"></span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Additional legal fees:</th>
-                <td class="text-right">
-                  £<span data-output="legalExtras"></span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Total fees:</th>
+                <th scope="row">Fees:</th>
                 <td class="text-right">£<span data-output="total"></span></td>
               </tr>
               <tr>
-                <th scope="row">With VAT:</th>
-                <td class="text-right">£<span data-output="totalWithVat"></span></td>
-              </tr>
+                  <th scope="row">VAT:</th>
+                  <td class="text-right">£<span data-output="totalVat"></span></td>
+                </tr>
               <tr>
-                <th scope="row">Total as percentage:</th>
-                <td class="text-right"><span data-output="totalAsPercentage"></span>%</td>
+                <th scope="row">Total:</th>
+                <td class="text-right">£<span data-output="totalWithVat"></span></td>
               </tr>
             </tbody>
           </table>
 
+          <hr>
+
+          <h3 class="h5">Get Discount</h3>
+
           <form class="form" data-view="discount">
             <input type="hidden" data-output="totalWithVat">
             <input type="hidden" data-output="price">
-            <div class="form-group" data-view="range">
-              <label for="upfrontDisplay">Upfront payment</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    £
-                  </span>
-                </div>
-                <input type="number" readonly class="form-control" id="upfrontDisplay" name="upfrontDisplay" value="600"
-                  data-view-output>
-              </div>
-
-              <input type="range" class="custom-range" name="upfront" id="upfront" min="300" max="900" step="50"
-                value="600">
+            <div class="form-group">
+              <label for="upfrontDisplay">Upfront fee</label>
+              <input type="range" class="custom-range" name="upfront" id="upfront" min="0" max="900" step="50"
+                value="0">
               <div class="text-center mt-2">
                 <strong date-output class="text-muted"></strong>
               </div>
             </div>
 
-            <table class="table table-sm">
+            <table class="table table-borderless table-sm">
               <tbody>
                 <tr>
-                  <th scope="row">Discount on balance:</th>
-                  <td class="text-right"><span data-output="discount"></span>%</td>
+                  <th scope="row">Upfront fee:</th>
+                  <td class="text-right">£<span data-output="upfront"></span></td>
                 </tr>
                 <tr>
-                  <th scope="row">Total discount:</th>
+                  <th scope="row">Balance (inc. VAT) on completion:</th>
+                  <td class="text-right">£<span data-output="balanceAfterDiscount"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Discount (inc. VAT):</th>
                   <td class="text-right">£<span data-output="totalDiscount"></span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Total paid:</th>
-                  <td class="text-right">£<span data-output="totalPaid"></span></td>
-                </tr>
-                <tr>
-                  <th scope="row">Total as percentage:</th>
-                  <td class="text-right"><span data-output="percentageOfValue"></span>%</td>
                 </tr>
               </tbody>
             </table>

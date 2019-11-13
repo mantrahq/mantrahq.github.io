@@ -63,6 +63,10 @@ const eaBands = [
 ]
 const discountBands = [
   {
+    upfront: 0,
+    discount: 0,
+  },
+  {
     upfront: 300,
     discount: 10,
   },
@@ -84,8 +88,31 @@ const discountBands = [
   },
 ]
 
+const legalExtrasOptions = [
+  {
+    name: 'fhHouse',
+    price: 0,
+  },
+  {
+    name: 'lhHouse',
+    price: 75,
+  },
+  {
+    name: 'lhFlat',
+    price: 175,
+  },
+  {
+    name: 'mortgage',
+    price: 100,
+  },
+];
+
 function withVat(n) {
   return n + (n * vat);
+}
+
+function justVat(n) {
+  return (n * vat);
 }
 
 function getLegalFee(price, firm) {
@@ -120,21 +147,30 @@ function getDiscount(upfront) {
   return discount;
 }
 
+function getLegalExtra(legalExtra) {
+  let legal;
+  const legalExtraData = legalExtrasOptions.find(l => l.name === legalExtra);
+  return legalExtraData.price;
+}
+
 function calculate(d) {
   let legalExtras = 0;
   if (d.legalExtras) {
-    legalExtras = Object.keys(d.legalExtras)
-    .reduce((sum, key) => sum + parseFloat(d.legalExtras[key] || 0), 0);
+    legalPrices = Object.values(d.legalExtras).map((cur) => {
+      return getLegalExtra(cur);
+    })
+    legalExtras = legalPrices.reduce((sum, price) => sum + price || 0, 0);
   }
   const price = parseFloat(d.price) || 0;
   const package = parseFloat(d.package) || 0;
-  const legal = getLegalFee(price, d.firm);
-  const legalWithVat = withVat(legal);
-  const ea = getEaFee(price);
-  const eaWithVat = withVat(ea);
+  const legal = Math.ceil(getLegalFee(price, d.firm));
+  const legalWithVat = Math.ceil(withVat(legal));
+  const ea = Math.ceil(getEaFee(price));
+  const eaWithVat = Math.ceil(withVat(ea));
   const total = ea + legal + legalComm + legalExtras + package;
-  const totalWithVat = withVat(ea) + withVat(legal) + legalComm + legalExtras + package;
-  const eaAsPercentage = withVat(ea) / price * 100;
+  const totalVat = justVat(legal) + justVat(ea);
+  const totalWithVat = eaWithVat + legalWithVat + legalComm + legalExtras + package;
+  const eaAsPercentage = eaWithVat / price * 100;
   const totalAsPercentage = totalWithVat / price * 100;
   return {
     price,
@@ -144,6 +180,7 @@ function calculate(d) {
     legalWithVat,
     legalExtras,
     total,
+    totalVat,
     totalWithVat,
     eaAsPercentage,
     totalAsPercentage,
@@ -161,6 +198,7 @@ function discount(f, u, p) {
   const totalDiscount = fees - totalPaid;
   const percentageOfValue = totalPaid / price * 100;
   return {
+    upfront,
     discount,
     balance,
     balanceAfterDiscount,

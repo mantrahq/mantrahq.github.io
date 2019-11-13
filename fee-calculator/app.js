@@ -54,9 +54,9 @@ function updateOutput(name, data) {
     const outputName = el.getAttribute('data-output');
     if (outputName === name) {
       if (el.tagName === 'INPUT') {
-        el.value = data.toFixed(2);
+        el.value = data.toFixed();
       } else {
-        el.innerHTML = data.toFixed(2);
+        el.innerHTML = data.toFixed();
       }
     }
   });
