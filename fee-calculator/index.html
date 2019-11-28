@@ -7,40 +7,29 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Fee Calculator | mantrahq.github.io</title>
+  <title>Redbrik Move 10,000 | mantrahq.github.io</title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css?v=1.0.0">
 
-
-  <style>
-    body {
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .container-fluid {
-      max-width: 660px;
-      margin: 0 auto;
-    }
-
-    form label {
-      font-weight: bold;
-    }
-  </style>
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="primary-header">
+      <div class="container-fluid py-3">
+        <a href="https://redbrik.co.uk/" target="_blank">
+          <img src="./images/logo.png" class="img-fluid" alt="Redbrik">
+        </a>
+      </div>
+  </div>
+  <div class="container-fluid py-3">
     <div class="row">
       <div class="col">
-        <h1 class="h3">Fee Calculator</h1>
+        <h1 class="h3">Redbrik Move 10,000</h1>
         <hr>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-3">
         <form id="form" class="form" data-view="calculate">
 
           <div class="form-group">
@@ -56,22 +45,22 @@
           </div>
           <div class="form-group">
             <label for="package">Marketing package</label>
-            <select class="custom-select" id="package" name="package">
+            <select class="form-control" id="package" name="package">
               <option value="295" selected>Standard</option>
               <option value="495">Social</option>
               <option value="695">Enhanced</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="firm">Lawyer firm</label>
-            <select class="custom-select" id="firm" name="firm">
+            <label for="firm">Legal representative</label>
+            <select class="form-control" id="firm" name="firm">
               <option selected value="taylorEmett">Taylor & Emett</option>
               <option value="keebles" disabled>Keebles</option>
               <option value="bannerJones" disabled>Banner Jones</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Legals</label>
+            <label>Legal options</label>
             <div class="custom-control custom-checkbox">
               <input class="custom-control-input" name="legalExtras[0]" type="checkbox" id="fhHouse" value="fhHouse">
               <label class="custom-control-label" for="fhHouse">
@@ -106,22 +95,10 @@
 
         <div class="collapse" id="collapseDiscount" data-view="discount">
           <h2 class="h4">Selling costs<br><small>Including all legal selling costs</small></h2>
-          <table class="table table-borderless table-sm">
-            <tbody>
-              <tr>
-                <th scope="row">Fees:</th>
-                <td class="text-right">£<span data-output="total"></span></td>
-              </tr>
-              <tr>
-                  <th scope="row">VAT:</th>
-                  <td class="text-right">£<span data-output="totalVat"></span></td>
-                </tr>
-              <tr>
-                <th scope="row">Total:</th>
-                <td class="text-right">£<span data-output="totalWithVat"></span></td>
-              </tr>
-            </tbody>
-          </table>
+          <p class="lead">
+            <span data-output="totalAsPercentage"></span>% of the contracted
+            sale price.
+          </p>
 
           <hr>
 
@@ -131,27 +108,24 @@
             <input type="hidden" data-output="totalWithVat">
             <input type="hidden" data-output="price">
             <div class="form-group">
-              <label for="upfrontDisplay">Upfront fee</label>
+              <label for="upfrontDisplay">Upfront payment</label>
               <input type="range" class="custom-range" name="upfront" id="upfront" min="0" max="900" step="50"
                 value="0">
-              <div class="text-center mt-2">
-                <strong date-output class="text-muted"></strong>
-              </div>
             </div>
 
             <table class="table table-borderless table-sm">
               <tbody>
                 <tr>
-                  <th scope="row">Upfront fee:</th>
-                  <td class="text-right">£<span data-output="upfront"></span></td>
+                  <th scope="row">Upfront payment:</th>
+                  <td class="text-right font-weight-bold">£<span data-output="upfront"></span></td>
                 </tr>
                 <tr>
-                  <th scope="row">Balance (inc. VAT) on completion:</th>
-                  <td class="text-right">£<span data-output="balanceAfterDiscount"></span></td>
+                  <th scope="row">Discounted fee:</th>
+                  <td class="text-right font-weight-bold"><span data-output="discount"></span>%</td>
                 </tr>
-                <tr>
+                <tr class="border-top border-bottom">
                   <th scope="row">Discount (inc. VAT):</th>
-                  <td class="text-right">£<span data-output="totalDiscount"></span></td>
+                  <td class="text-right font-weight-bold">£<span data-output="totalDiscount"></span></td>
                 </tr>
               </tbody>
             </table>
@@ -161,7 +135,6 @@
     </div>
   </div>
 
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -169,9 +142,9 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-  <script src="./serializejson.js?v0.2"></script>
-  <script src="./calculate.js?v0.2"></script>
-  <script src="./app.js?v0.2"></script>
+  <script src="./serializejson.js?v=1.0.0"></script>
+  <script src="./calculate.js?v=1.0.0"></script>
+  <script src="./app.js?v=1.0.0"></script>
 
 </body>
 
