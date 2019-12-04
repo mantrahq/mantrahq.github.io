@@ -60,7 +60,7 @@ const eaBands = [
     price: 700000,
     ea: 0.008,
   }
-]
+] // 
 const discountBands = [
   {
     upfront: 0,
@@ -170,8 +170,9 @@ function calculate(d) {
   const total = ea + legal + legalComm + legalExtras + package;
   const totalVat = justVat(legal) + justVat(ea);
   const totalWithVat = eaWithVat + legalWithVat + legalComm + legalExtras + package;
-  const eaAsPercentage = eaWithVat / price * 100;
-  const totalAsPercentage = totalWithVat / price * 100;
+  const eaAsPercentage = (eaWithVat / price * 100).toFixed(1);
+  const totalAsPercentage = (totalWithVat / price * 100).toFixed(1);
+  console.log(`totalAsPercentage = ${totalWithVat} / ${price} * 100 = ${totalAsPercentage}`)
   return {
     price,
     ea,
@@ -198,12 +199,12 @@ function discount(f, u, p) {
   const totalDiscount = fees - totalPaid;
   const percentageOfValue = totalPaid / price * 100;
   return {
-    upfront,
+    upfront: upfront.toFixed(),
     discount,
-    balance,
-    balanceAfterDiscount,
-    totalPaid,
-    totalDiscount,
+    balance: balance.toFixed(),
+    balanceAfterDiscount: balanceAfterDiscount.toFixed(),
+    totalPaid: totalPaid.toFixed(),
+    totalDiscount: totalDiscount.toFixed(),
     percentageOfValue,
   }
 }

@@ -1,10 +1,12 @@
+/*
 const form = document.querySelector('#form');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   const formData = $(form).serializeJSON();
+  console.log('SUBMITTED', formData)
   calculate(formData);
 });
-
+*/
 /* eslint-env browser */
 /* global $ Handlebars notify countryCodes validateCountryCode */
 
@@ -54,9 +56,9 @@ function updateOutput(name, data) {
     const outputName = el.getAttribute('data-output');
     if (outputName === name) {
       if (el.tagName === 'INPUT') {
-        el.value = data.toFixed();
+        el.value = data;
       } else {
-        el.innerHTML = data.toFixed();
+        el.innerHTML = data;
       }
     }
   });
