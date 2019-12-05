@@ -9,7 +9,7 @@
 
   <title>Redbrik Move 10,000 | mantrahq.github.io</title>
 
-  <link rel="stylesheet" href="./css/style.css?v=1.0.0">
+  <link rel="stylesheet" href="./css/style.css?v=1.1.0">
 
 </head>
 
@@ -24,23 +24,23 @@
   <div class="container-fluid py-3">
     <div class="row">
       <div class="col">
-        <h1 class="h3">Redbrik Move 10,000<br>Fee Calculator</h1>
+        <h1 class="h3"><strong>Redbrik Move 10,000</strong><br>Fee Calculator</h1>
         <hr>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
         <form id="form" class="form" data-view="calculate">
-
           <div class="form-group">
-            <label for="price">Asking price</label>
+            <input type="hidden" id="price" name="price" value="175000">
+            <label for="priceDisplay">Asking price</label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">
                   £
                 </span>
               </div>
-              <input type="number" class="form-control" id="price" name="price" value="175000">
+              <input type="text" class="form-control" id="priceDisplay" value="175,000" data-view="numberField">
             </div>
           </div>
           <div class="form-group">
@@ -94,11 +94,13 @@
       <div class="col-md-6">
 
         <div class="collapse" id="collapseDiscount" data-view="discount">
-          <h2 class="h4">Selling costs<br><small>Including all legal selling costs</small></h2>
-          <p class="lead">
-            <span data-output="totalAsPercentage"></span>% of the contracted
-            sale price.
-          </p>
+          <h2 class="h4">Selling costs<br>
+            <small>
+              Including all legal selling fees and VAT<br>
+              <span data-output="totalAsPercentage"></span>% of the contracted
+              sale price.
+            </small>
+          </h2>
 
           <hr>
 
@@ -109,7 +111,7 @@
             <input type="hidden" data-output="price">
             <div class="form-group">
               <label for="upfrontDisplay">Upfront payment</label>
-              <input type="range" class="custom-range" name="upfront" id="upfront" min="0" max="900" step="50"
+              <input type="range" class="custom-range" name="upfront" id="upfront" min="0" max="900" step="150"
                 value="0">
             </div>
 
@@ -121,11 +123,21 @@
                 </tr>
                 <tr>
                   <th scope="row">Discounted fee:</th>
-                  <td class="text-right font-weight-bold">£<span data-output="balanceAfterDiscount"></span></td>
+                  <td class="text-right font-weight-bold"><span data-output="percentageOfValue"></span>%</td>
                 </tr>
-                <tr class="border-top border-bottom">
+                <tr>
+                  <td colspan="2">
+                    <hr class="m-0">
+                  </td>
+                </tr>
+                <tr>
                   <th scope="row">Discount (inc. VAT):</th>
                   <td class="text-right font-weight-bold">£<span data-output="totalDiscount"></span></td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <hr class="m-0">
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -142,9 +154,9 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-  <script src="./serializejson.js?v=1.0.0"></script>
-  <script src="./calculate.js?v=1.0.0"></script>
-  <script src="./app.js?v=1.0.0"></script>
+  <script src="./serializejson.js?v=1.1.0"></script>
+  <script src="./calculate.js?v=1.1.0"></script>
+  <script src="./app.js?v=1.1.0"></script>
 
 </body>
 

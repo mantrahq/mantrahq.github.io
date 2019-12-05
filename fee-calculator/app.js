@@ -75,6 +75,19 @@ let App;
 const APPISC = {
   common: () => { },
 
+  numberField: (viewEl) => {
+    const el = viewEl;
+    el.addEventListener('input', (event) => {
+      if(event.which >= 37 && event.which <= 40) return;
+      const value = el.value.replace(/\D/g, "");
+      const formatted = value
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        el.closest('.form-group').querySelector('[type="hidden"]')
+          .value = value;
+        el.value = formatted
+    });
+  },
+
   discount: (viewEl) => {
     const el = viewEl;
     const upfront = el.querySelector('[type="range"]');

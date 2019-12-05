@@ -171,7 +171,7 @@ function calculate(d) {
   const totalVat = justVat(legal) + justVat(ea);
   const totalWithVat = eaWithVat + legalWithVat + legalComm + legalExtras + package;
   const eaAsPercentage = (eaWithVat / price * 100).toFixed(1);
-  const totalAsPercentage = (totalWithVat / price * 100).toFixed(1);
+  const totalAsPercentage = (totalWithVat / price * 100).toFixed(2);
   console.log(`totalAsPercentage = ${totalWithVat} / ${price} * 100 = ${totalAsPercentage}`)
   return {
     price,
@@ -200,11 +200,11 @@ function discount(f, u, p) {
   const percentageOfValue = totalPaid / price * 100;
   return {
     upfront: upfront.toFixed(),
-    discount,
+    discount: discount,
     balance: balance.toFixed(),
     balanceAfterDiscount: balanceAfterDiscount.toFixed(),
     totalPaid: totalPaid.toFixed(),
     totalDiscount: totalDiscount.toFixed(),
-    percentageOfValue,
+    percentageOfValue: percentageOfValue.toFixed(2),
   }
 }
