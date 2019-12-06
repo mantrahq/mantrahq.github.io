@@ -6,29 +6,9 @@ const legalFirms = [
     name: 'taylorEmett',
     bands: [
       {
-        price: 0,
-        legal: 475,
-        tt: 35,
-      },
-      {
-        price: 150000,
-        legal: 550,
-        tt: 36,
-      },
-      {
-        price: 300000,
-        legal: 650,
-        tt: 37,
-      },
-      {
-        price: 500000,
-        legal: 790,
-        tt: 38,
-      },
-      {
-        price: 750000,
-        legal: 940,
-        tt: 39,
+        price: 1500000,
+        legal: 1700,
+        tt: 41,
       },
       {
         price: 1000000,
@@ -36,55 +16,77 @@ const legalFirms = [
         tt: 40,
       },
       {
-        price: 1500000,
-        legal: 1700,
-        tt: 41,
+        price: 750000,
+        legal: 940,
+        tt: 39,
+      },
+      {
+        price: 500000,
+        legal: 790,
+        tt: 38,
+      },
+      {
+        price: 300000,
+        legal: 650,
+        tt: 37,
+      },
+      {
+        price: 150000,
+        legal: 550,
+        tt: 36,
+      },
+      {
+        price: 0,
+        legal: 475,
+        tt: 35,
       },
     ]
   }
 ];
+
 const eaBands = [
   {
-    price: 0,
-    ea: 0.01,
-  },
-  {
-    price: 500000,
-    ea: 0.009,
+    price: 700000,
+    ea: 0.008,
   },
   {
     price: 600000,
     ea: 0.0085,
   },
   {
-    price: 700000,
-    ea: 0.008,
-  }
-] // 
+    price: 500000,
+    ea: 0.009,
+  },
+  {
+    price: 0,
+    ea: 0.01,
+  },
+];
+
 const discountBands = [
   {
-    upfront: 0,
-    discount: 0,
-  },
-  {
-    upfront: 300,
-    discount: 10,
-  },
-  {
-    upfront: 450,
-    discount: 12.5,
-  },
-  {
-    upfront: 600,
-    discount: 15,
+    upfront: 900,
+    discount: 20,
   },
   {
     upfront: 750,
     discount: 17.5,
   },
   {
-    upfront: 900,
-    discount: 20,
+    upfront: 600,
+    discount: 15,
+  },
+  {
+    upfront: 450,
+    discount: 12.5,
+  },
+  {
+    upfront: 300,
+    discount: 10,
+  },
+  {
+    upfront: 0,
+    discount: 0,
   },
 ]
 
@@ -118,31 +120,29 @@ function justVat(n) {
 function getLegalFee(price, firm) {
   let legal;
   const firmData = legalFirms.find(f => f.name === firm);
+  console.log(firmData)
 
-  firmData.bands.reverse().forEach((r) => {
-    if (price >= r.price) {
-      legal = r.legal + r.tt;
-    }
+  firmData.bands.some((r) => {
+    legal = r.legal + r.tt;
+    return (price >= r.price);
   });
   return legal;
 }
 
 function getEaFee(price) {
   let ea;
-  eaBands.reverse().forEach((r) => {
-    if (price >= r.price) {
-      ea = price * r.ea;
-    }
+  eaBands.some((r) => {
+    ea = price * r.ea;
+    return (price >= r.price);
   });
   return ea;
 }
 
 function getDiscount(upfront) {
   let discount;
-  discountBands.reverse().forEach((r) => {
-    if (upfront >= r.upfront) {
-      discount = r.discount;
-    }
+  discountBands.some((r) => {
+    discount = r.discount;
+    return (upfront >= r.upfront);
   });
   return discount;
 }
@@ -169,6 +169,8 @@ function calculate(d) {
   const eaWithVat = Math.ceil(withVat(ea));
   const total = ea + legal + legalComm + legalExtras + package;
   const totalVat = justVat(legal) + justVat(ea);
+  console.log('legal,eaWithVat,legalWithVat,legalComm,legalExtras,package')
+  console.log(legal, eaWithVat, legalWithVat, legalComm, legalExtras, package)
   const totalWithVat = eaWithVat + legalWithVat + legalComm + legalExtras + package;
   const eaAsPercentage = (eaWithVat / price * 100).toFixed(1);
   const totalAsPercentage = (totalWithVat / price * 100).toFixed(2);
