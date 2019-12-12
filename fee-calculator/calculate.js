@@ -1,6 +1,8 @@
 const debug = true;
 const vat = 0.2;
 const legalComm = 125;
+const lowestEaBand = 175000;
+const baseEa = 1750;
 const legalFirms = [
   {
     name: 'taylorEmett',
@@ -46,43 +48,66 @@ const legalFirms = [
 
 const eaBands = [
   {
-    price: 700000,
-    ea: 0.008,
+    price: 1500000,
+    base: 8900,
+    increment: 15,
   },
   {
-    price: 600000,
-    ea: 0.0085,
+    price: 1000000,
+    base: 6900,
+    increment: 20,
+  },
+  {
+    price: 750000,
+    base: 5650,
+    increment: 25,
   },
   {
     price: 500000,
-    ea: 0.009,
+    base: 4150,
+    increment: 30,
   },
   {
-    price: 0,
-    ea: 0.01,
+    price: 300000,
+    base: 2750,
+    increment: 35,
+  },
+  {
+    price: 200000,
+    base: 1750,
+    increment: 40,
+  },
+  {
+    price: 175000,
+    base: 1750,
+    increment: 0,
   },
 ];
 
 const discountBands = [
   {
     upfront: 900,
-    discount: 20,
+    discount: 1147.5,
   },
   {
     upfront: 750,
-    discount: 17.5,
+    discount: 937,
   },
   {
     upfront: 600,
-    discount: 15,
+    discount: 735,
   },
   {
     upfront: 450,
-    discount: 12.5,
+    discount: 540,
   },
   {
     upfront: 300,
-    discount: 10,
+    discount: 352.5,
+  },
+  {
+    upfront: 150,
+    discount: 172.5,
   },
   {
     upfront: 0,
@@ -107,6 +132,10 @@ const legalExtrasOptions = [
     name: 'mortgage',
     price: 100,
   },
+  {
+    name: 'epc',
+    price: 75,
+  },
 ];
 
 function withVat(n) {
@@ -120,7 +149,6 @@ function justVat(n) {
 function getLegalFee(price, firm) {
   let legal;
   const firmData = legalFirms.find(f => f.name === firm);
-  console.log(firmData)
 
   firmData.bands.some((r) => {
     legal = r.legal + r.tt;
@@ -130,9 +158,11 @@ function getLegalFee(price, firm) {
 }
 
 function getEaFee(price) {
+  const band = Math.ceil(price / 5000) * 5000;
   let ea;
   eaBands.some((r) => {
-    ea = price * r.ea;
+    const multiplier = (band - r.price) / 5000;
+    ea = r.base + (r.increment * multiplier);
     return (price >= r.price);
   });
   return ea;
@@ -169,12 +199,12 @@ function calculate(d) {
   const eaWithVat = Math.ceil(withVat(ea));
   const total = ea + legal + legalComm + legalExtras + package;
   const totalVat = justVat(legal) + justVat(ea);
-  console.log('legal,eaWithVat,legalWithVat,legalComm,legalExtras,package')
-  console.log(legal, eaWithVat, legalWithVat, legalComm, legalExtras, package)
+  // console.log('legal,eaWithVat,legalWithVat,legalComm,legalExtras,package')
+  // console.log(legal, eaWithVat, legalWithVat, legalComm, legalExtras, package)
   const totalWithVat = eaWithVat + legalWithVat + legalComm + legalExtras + package;
   const eaAsPercentage = (eaWithVat / price * 100).toFixed(1);
   const totalAsPercentage = (totalWithVat / price * 100).toFixed(2);
-  console.log(`totalAsPercentage = ${totalWithVat} / ${price} * 100 = ${totalAsPercentage}`)
+  // console.log(`totalAsPercentage = ${totalWithVat} / ${price} * 100 = ${totalAsPercentage}`)
   return {
     price,
     ea,
@@ -196,7 +226,7 @@ function discount(f, u, p) {
   const upfront = parseFloat(u);
   const discount = getDiscount(upfront);
   const balance = fees - upfront;
-  const balanceAfterDiscount = balance - (balance * (discount / 100));
+  const balanceAfterDiscount = balance - discount;
   const totalPaid = balanceAfterDiscount + upfront;
   const totalDiscount = fees - totalPaid;
   const percentageOfValue = totalPaid / price * 100;
